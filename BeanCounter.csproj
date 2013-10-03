@@ -36,11 +36,26 @@
     <Compile Include="Program.cs" />
     <Compile Include="NDesk.Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CsvGrammar.cs" />
+    <Compile Include="CsvReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CsvGrammar.giza" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MetaphysicsIndustries.Giza\MetaphysicsIndustries.Giza.csproj">
+      <Project>{98B42ACF-8370-4428-9D41-73FF1CEFB2E4}</Project>
+      <Name>MetaphysicsIndustries.Giza</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MetaphysicsIndustries.Collections\MetaphysicsIndustries.Collections.csproj">
+      <Project>{FF2B8A90-E8D2-4CF6-81E6-4A7BCE1FF900}</Project>
+      <Name>MetaphysicsIndustries.Collections</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

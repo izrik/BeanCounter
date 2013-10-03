@@ -1,0 +1,21 @@
+
+/*
+*  CSV file grammar from RFC 4180
+*/
+
+<mind whitespace>
+file = record (('\r'? '\n')+ record)* ( '\r'? '\n' )* ;
+
+<mind whitespace>
+record = field (',' field?)* ;
+
+field = (escaped | non-escaped);
+
+<mind whitespace>
+escaped = '"' ( text-data | [,\r\n] | '""' )* '"' ;
+
+<mind whitespace>
+non-escaped = text-data+;
+
+<mind whitespace>
+text-data = [ !#$%&'()*+-./\d:;<=>?@\l\[\\\]^_`{|}~] ;
