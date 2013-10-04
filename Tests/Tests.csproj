@@ -35,4 +35,13 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="CsvReaderTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BeanCounter.csproj">
+      <Project>{DA0E22C1-47B5-48B6-B0E8-2472A21C0950}</Project>
+      <Name>BeanCounter</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
