@@ -19,6 +19,15 @@ namespace BeanCounter
 
         public List<List<string>> ReadCsvFile(string input)
         {
+            if (input == string.Empty)
+            {
+                return new List<List<string>> {
+                    new List<string> {
+                        string.Empty
+                    }
+                };
+            }
+
             var errors = new List<Error>();
             var spans = _fileSpanner.Process(input, errors);
             if (errors.ContainsNonWarnings())
@@ -42,46 +51,71 @@ namespace BeanCounter
             }
 
             var lines = new List<List<string>>();
+            var prevNewline = true;
             foreach (var linespan in spans[0].Subspans)
             {
-                if (linespan.DefRef != _grammar.def_record) continue;
-
-                var line = new List<string>();
-                bool lastComma = true;
-                foreach (var sub in linespan.Subspans)
+                if (linespan.DefRef == _grammar.def_record)
                 {
-                    if (sub.DefRef == _grammar.def_field)
+                    var line = new List<string>();
+                    bool lastComma = true;
+                    foreach (var sub in linespan.Subspans)
                     {
-                        string value = sub.CollectValue();
-                        if (value.StartsWith("\""))
+                        if (sub.DefRef == _grammar.def_field)
                         {
-                            value = value.Trim('"');
-                            value.Replace("\"\"", "\"");
+                            string value = sub.CollectValue();
+                            if (value.StartsWith("\""))
+                            {
+                                value = value.Trim('"');
+                                value.Replace("\"\"", "\"");
+                            }
+
+                            line.Add(value);
+
+                            lastComma = false;
                         }
-
-                        line.Add(value);
-
-                        lastComma = false;
+                        else 
+                        {
+                            if (lastComma)
+                            {
+                                line.Add(string.Empty);
+                            }
+                            else
+                            {
+                                lastComma = true;
+                            }
+                        }
                     }
-                    else 
+
+                    if (lastComma)
                     {
-                        if (lastComma)
-                        {
-                            line.Add(string.Empty);
-                        }
-                        else
-                        {
-                            lastComma = true;
-                        }
+                        line.Add(string.Empty);
+                    }
+
+                    lines.Add(line);
+
+                    prevNewline = false;
+                }
+                else if (linespan.Node == _grammar.node_file_1__000A_ ||
+                        linespan.Node == _grammar.node_file_4__000A_ ||
+                        linespan.Node == _grammar.node_file_7__000A_ ||
+                        linespan.Node == _grammar.node_file_9__000A_)
+                {
+                    if (prevNewline)
+                    {
+                        lines.Add(new List<string> { string.Empty });
+                    }
+                    else
+                    {
+                        prevNewline = true;
                     }
                 }
 
-                if (lastComma)
-                {
-                    line.Add(string.Empty);
-                }
 
-                lines.Add(line);
+            }
+
+            if (prevNewline)
+            {
+                lines.Add(new List<string> { string.Empty });
             }
 
             return lines;
