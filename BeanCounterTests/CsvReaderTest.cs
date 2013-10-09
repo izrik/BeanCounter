@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System;
 using BeanCounter;
 
-namespace Tests
+namespace BeanCounterTests
 {
     [TestFixture]
     public class CsvReaderTest

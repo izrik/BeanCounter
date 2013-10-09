@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaphysicsIndustries.Giza"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaphysicsIndustries.Collections", "..\MetaphysicsIndustries.Collections\MetaphysicsIndustries.Collections.csproj", "{FF2B8A90-E8D2-4CF6-81E6-4A7BCE1FF900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{5BBBCF05-43E1-4FB7-A4B1-07F308B7A268}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeanCounterTests", "BeanCounterTests\BeanCounterTests.csproj", "{5BBBCF05-43E1-4FB7-A4B1-07F308B7A268}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
