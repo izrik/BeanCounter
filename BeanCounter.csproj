@@ -48,6 +48,8 @@
     <None Include="CsvGrammar.giza" />
     <None Include="LICENSE" />
     <None Include="TODO" />
+    <None Include="HISTORY" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MetaphysicsIndustries.Giza\MetaphysicsIndustries.Giza.csproj">
