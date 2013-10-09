@@ -4,11 +4,12 @@
 */
 
 <mind whitespace>
-file = record (('\r'? '\n')+ record)* ( '\r'? '\n' )* ;
+file = record (('\r'? '\n') record?)* ;
 
 <mind whitespace>
-record = field (',' field?)* ;
+record = ','? field (',' field?)* ;
 
+<mind whitespace>
 field = (escaped | non-escaped);
 
 <mind whitespace>

@@ -1,6 +1,7 @@
 using System;
 using MetaphysicsIndustries.Giza;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BeanCounter
 {
@@ -22,7 +23,14 @@ namespace BeanCounter
             var spans = _fileSpanner.Process(input, errors);
             if (errors.ContainsNonWarnings())
             {
-                throw new InvalidOperationException("There were errors");
+                var sb = new StringBuilder();
+                sb.AppendLine("There were errors:");
+                foreach (var error in errors)
+                {
+                    sb.AppendFormat("  {0}", error.Description);
+                    sb.AppendLine();
+                }
+                throw new InvalidOperationException(sb.ToString());
             }
             if (spans.Length > 1)
             {
@@ -39,7 +47,7 @@ namespace BeanCounter
                 if (linespan.DefRef != _grammar.def_record) continue;
 
                 var line = new List<string>();
-                bool lastComma = false;
+                bool lastComma = true;
                 foreach (var sub in linespan.Subspans)
                 {
                     if (sub.DefRef == _grammar.def_field)
@@ -66,6 +74,11 @@ namespace BeanCounter
                             lastComma = true;
                         }
                     }
+                }
+
+                if (lastComma)
+                {
+                    line.Add(string.Empty);
                 }
 
                 lines.Add(line);
