@@ -1,6 +1,8 @@
 using System;
 using NDesk.Options;
 using System.Reflection;
+using System.IO;
+using System.Collections.Generic;
 
 namespace BeanCounter
 {
@@ -40,6 +42,10 @@ namespace BeanCounter
                     ShowVersion();
                     return;
                 }
+
+                string file = File.ReadAllText(args[0]);
+                CsvReader reader = new CsvReader();
+                var lines = reader.ReadCsvFile(file);
             }
             catch (Exception ex)
             {
