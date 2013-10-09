@@ -1,6 +1,7 @@
 using System;
+using MetaphysicsIndustries.Giza;
 
-namespace MetaphysicsIndustries.Giza
+namespace BeanCounter
 {
     public class CsvGrammar : Grammar
     {
